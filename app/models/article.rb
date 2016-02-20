@@ -1,4 +1,5 @@
 class Article < ActiveRecord::Base
+  attr_accessor :search_term
 
   has_many :bookmarks
   has_many :users, through: :bookmarks
@@ -9,4 +10,11 @@ class Article < ActiveRecord::Base
   has_many :article_countries
   has_many :countries, through: :article_countries
 
+  def self.search(term)
+    if term
+      where("title LIKE ?","%" + term + "%")
+    else
+      all
+    end
+  end
 end
