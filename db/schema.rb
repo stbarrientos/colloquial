@@ -13,16 +13,21 @@
 
 ActiveRecord::Schema.define(version: 20160209213432) do
 
+  create_table "article_countries", force: :cascade do |t|
+    t.integer "country_id", limit: 4, null: false
+    t.integer "article_id", limit: 4, null: false
+  end
+
   create_table "article_publications", force: :cascade do |t|
-    t.integer  "articles_id",     limit: 4
-    t.integer  "publications_id", limit: 4
+    t.integer  "article_id",     limit: 4, null: false
+    t.integer  "publication_id", limit: 4, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "article_tags", force: :cascade do |t|
-    t.integer  "tags_id",     limit: 4
-    t.integer  "articles_id", limit: 4
+    t.integer  "tag_id",     limit: 4, null: false
+    t.integer  "article_id", limit: 4, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,9 +42,9 @@ ActiveRecord::Schema.define(version: 20160209213432) do
   add_index "articles", ["url"], name: "index_articles_on_url", unique: true, using: :btree
 
   create_table "bookmarks", force: :cascade do |t|
-    t.integer  "articles_id", limit: 4,   null: false
-    t.integer  "users_id",    limit: 4,   null: false
-    t.string   "name",        limit: 255
+    t.integer  "article_id", limit: 4,   null: false
+    t.integer  "user_id",    limit: 4,   null: false
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,8 +61,8 @@ ActiveRecord::Schema.define(version: 20160209213432) do
   add_index "countries", ["name"], name: "index_countries_on_name", unique: true, using: :btree
 
   create_table "country_publications", force: :cascade do |t|
-    t.integer  "countries_id",    limit: 4
-    t.integer  "publications_id", limit: 4
+    t.integer  "country_id",     limit: 4, null: false
+    t.integer  "publication_id", limit: 4, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

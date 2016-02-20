@@ -8,8 +8,8 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table :bookmarks do |t|
-      t.references :articles, null: false
-      t.references :users, null: false
+      t.references :article, null: false
+      t.references :user, null: false
       t.string :name, default: nil
       t.timestamps
     end
@@ -20,8 +20,8 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table :article_tags do |t|
-      t.references :tags
-      t.references :articles
+      t.references :tag, null: false
+      t.references :article, null: false
       t.timestamps
     end
 
@@ -33,8 +33,8 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table :article_publications do |t|
-      t.references :articles
-      t.references :publications
+      t.references :article, null: false
+      t.references :publication, null: false
       t.timestamps
     end
 
@@ -47,9 +47,14 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table :country_publications do |t|
-      t.references :countries
-      t.references :publications
+      t.references :country, null: false
+      t.references :publication, null: false
       t.timestamps
+    end
+
+    create_table :article_countries do |t|
+      t.references :country, null: false
+      t.references :article, null: false
     end
 
     add_index :articles, :url, unique: true
