@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: 'articles#index'
+
+  get '/advanced', to: 'articles#advanced_search', as: :advanced_search
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

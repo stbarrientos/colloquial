@@ -1,0 +1,12 @@
+<h1>Advanced Search Page</h1>
+
+<div class="col-md-12">
+  <%= form_tag root_path, method: :get, class: "navbar-form navbar-left search-form" do %>
+    <%= text_field_tag(:search, params[:search], placeholder: "Search", class: "form-control") %>
+    <%= text_field_tag(:type, params[:type], placeholder: "Type", class: "form-control") %>
+  <% end %>
+</div>
+
+<div>
+  <h4><%= @message %></h4>
+</div>
