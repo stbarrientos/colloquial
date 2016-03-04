@@ -1,20 +1,86 @@
-<div class="well">
-  <%= form_tag root_path, method: :get, class: "navbar-form navbar-left search-form" do %>
-    <%= text_field_tag(
-        :search,
-        params[:search],
-        placeholder: "Search",
-        class: "form-control"
-    ) %>
-  <% end %>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-2 search">
+      <h4 class="subheader">Search</h4>
+      <%= form_tag root_path, method: :get, :class => "search-form" do %>
+        <!-- Article name -->
+        <div class="form-group">
+          <%= label_tag :article_title, "Article Title", :class => "control-label" %>
+          <%= text_field_tag :article_title, params[:article_title], placeholder: "Politics In America", :class => "form-control" %>
+        </div>
+
+        <!-- Tag Names  -->
+        <div class="form-group">
+          <%= label_tag :tag_id, "Tags", :class => "control-label" %>
+          <div>
+            <%= select_tag :tag_id, options_from_collection_for_select(@tags, :id, :name), multiple: true %>
+          </div>
+        </div>
+
+        <!--  URL  -->
+        <div class="form-group">
+          <%= label_tag :publication_id, "Publications", :class => "control-label" %>
+          <%= select_tag :publication_id, options_from_collection_for_select(@publications, :id, :name), multiple: true %>
+        </div>
+
+        <%= submit_tag "Search", :class => "btn btn-primary" %>
+      <% end %>
+      <div class="advanced-search-link">
+        <%= link_to "Advanced Search", advanced_search_path %>
+      </div>
+    </div>
+    <div class="col-md-8 articles">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row articles-filters">
+            <ul>
+              <li><a href"#">Category</a></li>
+              <li><a href="#">Country</a></li>
+              <li><a href="#">Region</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <% @articles.each do |article| %>
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1 article">
+                <h3><%= link_to article.list_name, article.url %></h3>
+                <ul class="article-tags">
+                  <li>Tags:</li>
+                  <% article.tags.each do |tag| %>
+                    <li class="tag"><%= tag.name %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 bookmarks">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <h5 class="subheader">Bookmarks</h5>
+          <% if @user %>
+          <ul class="bookmarks-list">
+            <% @bookmarks.each do |b| %>
+              <li><%= link_to b.name, b.article.url %></li>
+            <% end %>
+          </ul>
+          <% else %>
+            <p>You Must Register/Sign In To Create Bookmarks</p>
+          <% end %>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="well">
-  <ul>
-    <% @articles.each do |a| %>
-    <li><%= a.title %></li>
-    <% end %>
-  </ul>
-</div>
-
-<%= link_to "Advanced Search", advanced_search_path %>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#publication_id, #tag_id').multiselect();
+    });
+</script>

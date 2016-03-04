@@ -7,8 +7,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="col-md-12 header">
+    <div class="container-fluid">
+      <header>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-2">
+                <h1>Colloquial</h1>
+              </div>
+              <div class="col-md-10">
+                <div class="login">
+                  <% if current_user %>
+                    <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+                  <% else %>
+                    <%= link_to "Log In / Sign Up", new_user_session_path %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
 
-<%= yield %>
+  <div class="content">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

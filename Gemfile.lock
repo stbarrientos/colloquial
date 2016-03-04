@@ -43,6 +43,8 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-multiselect-rails (0.9.9)
+      rails (>= 4.0.0)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -161,6 +163,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-multiselect-rails
   bootstrap-sass (~> 3.3.6)
   byebug
   coffee-rails (~> 4.1.0)

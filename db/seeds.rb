@@ -44,8 +44,8 @@ article_tags = ArticleTag.create([
 ])
 
 publications = Publication.create([
-  { name: "CNN", language: "English", bias: "American Left" },
-  { name: "FOX", language: "English", bias: "American Right" }
+  { name: "Google", language: "English", bias: "American Left" },
+  { name: "Yahoo", language: "English", bias: "American Right" }
 ])
 
 article_publications = ArticlePublication.create([
