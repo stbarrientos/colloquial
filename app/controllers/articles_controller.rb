@@ -11,6 +11,11 @@ class ArticlesController < ApplicationController
     @message = greeting
   end
 
+  def api_search
+    @articles = Article.search search_params
+    render json: { result: @articles }
+  end
+
   private
 
   def article_params

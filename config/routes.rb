@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   get '/advanced', to: 'articles#advanced_search', as: :advanced_search
 
+  post '/api/search', to: 'articles#api_search', as: :api_search
+  #get '/api/search', to: 'articles#get_api_search', as: :api_search
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
