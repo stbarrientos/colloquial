@@ -1,0 +1,13 @@
+<% @articles.each do |article| %>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 article">
+      <h3><%= link_to article.list_name, article.url %></h3>
+      <ul class="article-tags">
+        <li>Tags:</li>
+        <% article.tags.each do |tag| %>
+          <li class="tag"><%= tag.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

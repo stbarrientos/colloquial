@@ -40,31 +40,15 @@ colloquial.searchView = {
   },
 
   showResults: function(data){
-     console.table(data);
-     data = data["result"];
-     var htmlString = "";
-     for(var i = 0; i < data.length; i++){
-       htmlString += "<div class='row'>"
-       htmlString += "<div class='col-md-12'>"; 
-       htmlString += "<div class='row'>";
-       htmlString += "<div class='col-md-10 col-md-offset-1 article'>";
-       htmlString += "<h3><a href='" + data[i]["url"] + "'>" + data[i]["title"] + "</a></h3>";
-
-       htmlString += "</div>";
-       htmlString += "</div>";
-       htmlString += "</div>";
-       htmlString += "</div>";
-     };
-
-     this.resultsElement.html(htmlString);
+    this.resultsElement.html(data);
   }
 
 };
 
 colloquial.searchController = {
   
-  renderView: function(json){
-    colloquial.searchView.showResults(json);
+  renderView: function(data){
+    colloquial.searchView.showResults(data);
   },
 
   sendSearchRequest: function(json){
@@ -72,11 +56,11 @@ colloquial.searchController = {
     $.ajax({
       url: "/api/search",
       method: "POST",
-      dataType: "json",
+      dataType: "html",
       data: json,
       success: function(data){
-        var digestedResponse = colloquial.searchModel.digestResponse(data); 
-        self.renderView(digestedResponse);
+        console.log(data);
+        self.renderView(data);
       }
     });
   }

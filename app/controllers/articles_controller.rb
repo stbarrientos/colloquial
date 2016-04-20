@@ -13,7 +13,8 @@ class ArticlesController < ApplicationController
 
   def api_search
     @articles = Article.search search_params
-    render json: { result: @articles }
+    # render json: { result: @articles }
+    render partial: "articles"#, layout: false
   end
 
   private
